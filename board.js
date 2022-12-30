@@ -1,8 +1,67 @@
 class Board {
-  reset() {
-    this.grid = this.getEmptyBoard()
+  ctx
+  ctxNext
+  grid
+  piece
+  next
+  requestId
+  time
+
+  constructor(ctx, ctxNext) {
+    this.ctx = ctx
+    this.ctxNext = ctxNext
+    this.init()
   }
-  getEmptyBoard() {
+
+  init() {
+    ctx.canvas.width = COLS * BLOCK_SIZE
+    ctx.canvas.height = ROWS * BLOCK_SIZE
+
+    ctx.scale(BLOCK_SIZE, BLOCK_SIZE)
+  }
+
+  reset() {
+    this.grid = this.getEmptyGrid()
+    this.piece = new Piece(this.ctx)
+    this.piece.setStartingPosition()
+    this.getNewPiece()
+  }
+  getNewPiece() {
+    this.next = new Piece(this.ctxNext)
+    this.ctxNext.clearRect(
+      0,
+      0,
+      this.ctxNext.canvas.width,
+      this.ctxNext.canvas.height
+    )
+    this.next.draw()
+  }
+
+  draw() {
+    this.piece.draw()
+    this.drawBoard()
+  }
+
+  drop() {
+    let p = moves[KEY.DOWN](this.piece)
+    if (this.valid(p)) {
+      this.piece.move(p)
+    } else {
+      this.freeze()
+      this.clearLines()
+      if (this.piece.y === 0) {
+        //GAME OVER
+        return false
+      }
+      this.piece = this.next
+      this.piece.ctx = this.ctx
+      this.piece.setStartingPosition()
+      this.getNewPiece()
+    }
+    return true
+  }
+
+  getEmptyGrid() {
     return Array.from({ length: ROWS }, () => Array(COLS).fill(0))
   }
 
@@ -11,7 +70,10 @@ class Board {
       return row.every((value, dx) => {
         let x = p.x + dx
         let y = p.y + dy
-        return this.insideWalls(x) && this.aboveFloor(y)
+        return (
+          value === 0 ||
+          (this.insideWalls(x) && this.aboveFloor(y) && this.notOccupied(x, y))
+        )
       })
     })
   }
@@ -22,6 +84,10 @@ class Board {
 
   aboveFloor(y) {
     return y <= ROWS
+  }
+
+  notOccupied(x, y) {
+    return this.grid[y] && this.grid[y][x] === 0
   }
 
   rotate(p) {
