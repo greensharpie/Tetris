@@ -22,7 +22,8 @@ const moves = {
   [KEY.LEFT]: (p) => ({ ...p, x: p.x - 1 }),
   [KEY.RIGHT]: (p) => ({ ...p, x: p.x + 1 }),
   [KEY.DOWN]: (p) => ({ ...p, y: p.y + 1 }),
-  [KEY.SPACE]: (p) => ({ ...p, y: p.y + 1 }) //hard drop
+  [KEY.SPACE]: (p) => ({ ...p, y: p.y + 1 }), //hard drop
+  [KEY.UP]: (p) => board.rotate(p)
 }
 
 document.addEventListener('keydown', (event) => {
