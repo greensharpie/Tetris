@@ -26,6 +26,14 @@ let account = new Proxy(accountValues, {
 
 let requestId
 
+const moves = {
+  [KEY.LEFT]: (p) => ({ ...p, x: p.x - 1 }),
+  [KEY.RIGHT]: (p) => ({ ...p, x: p.x + 1 }),
+  [KEY.DOWN]: (p) => ({ ...p, y: p.y + 1 }),
+  [KEY.SPACE]: (p) => ({ ...p, y: p.y + 1 }), //hard drop
+  [KEY.UP]: (p) => board.rotate(p)
+}
+
 let board = new Board(ctx, ctxNext)
 addEventListener()
 initNext()
@@ -34,23 +42,6 @@ function initNext() {
   ctx.ctxNext.canvas.width = 4 * BLOCK_SIZE
   ctx.ctxNext.canvas.height = 4 * BLOCK_SIZE
   ctx.scale(BLOCK_SIZE, BLOCK_SIZE)
-}
-
-function play() {
-  board.reset()
-  console.table(board.grid)
-  let piece = new Piece(ctx)
-  piece.draw()
-
-  board.piece = piece
-}
-
-const moves = {
-  [KEY.LEFT]: (p) => ({ ...p, x: p.x - 1 }),
-  [KEY.RIGHT]: (p) => ({ ...p, x: p.x + 1 }),
-  [KEY.DOWN]: (p) => ({ ...p, y: p.y + 1 }),
-  [KEY.SPACE]: (p) => ({ ...p, y: p.y + 1 }), //hard drop
-  [KEY.UP]: (p) => board.rotate(p)
 }
 
 function addEventListener() {
@@ -84,4 +75,65 @@ function addEventListener() {
       // board.piece.draw()
     }
   })
+}
+
+function resetGame() {
+  account.score = 0
+  account.lines = 0
+  account.level = 0
+  board.reset()
+  time = { start: 0, elapsed: 0, level: LEVEL[accounts.level] }
+}
+
+function play() {
+  resetGame()
+  time.start = perform.now()
+  if (requestId) {
+    cancelAnimationFrame(requestId)
+  }
+
+  animate()
+  // board.reset()
+  // console.table(board.grid)
+  // let piece = new Piece(ctx)
+  // piece.draw()
+
+  // board.piece = piece
+}
+
+function animate() {
+  time.elapsed = now - time.start
+  if (time.elapsed > time.level) {
+    time.start = now
+    if (!board.drop()) {
+      gameOver()
+      return
+    }
+  }
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+  board.draw()
+  requestId = requestAnimationFrame(animate)
+}
+
+function gameOver() {
+  cancelAnimationFrame(requestId)
+  ctx.fillStyle = 'black'
+  ctx.fillRect(1, 3, 8, 1.2)
+  ctx.font = '1px Arial'
+  ctx.fillStyle = 'red'
+  ctx.fillText('Game Over', 1.8, 4)
+}
+
+function pause() {
+  if (!requestId) {
+    animate()
+    return
+  }
+  cancelAnimationFrame(requestId)
+  requestId = null
+  ctx.fillStyle = 'black'
+  ctx.fillRect(1, 3, 8, 1.2)
+  ctx.font = '1px Arial'
+  ctx.fillStyle = 'red'
+  ctx.fillText('Pause', 1.8, 4)
 }
