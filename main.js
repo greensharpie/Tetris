@@ -39,9 +39,9 @@ addEventListener()
 initNext()
 
 function initNext() {
-  ctx.ctxNext.canvas.width = 4 * BLOCK_SIZE
-  ctx.ctxNext.canvas.height = 4 * BLOCK_SIZE
-  ctx.scale(BLOCK_SIZE, BLOCK_SIZE)
+  ctxNext.canvas.width = 4 * BLOCK_SIZE
+  ctxNext.canvas.height = 4 * BLOCK_SIZE
+  ctxNext.scale(BLOCK_SIZE, BLOCK_SIZE)
 }
 
 function addEventListener() {
