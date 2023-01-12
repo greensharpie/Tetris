@@ -14,19 +14,7 @@ Tetris replica project
 
 ### **_Description_**
 
-Door Drop is a food delivery service, similar to competitors like Uber Eats, Postmates, GrubHub, and Doordash.
-
-Authenticated Door Drop users can log in to:
-
-- View a feed of restaurants for users looking to order great food and have it delivered to their home.
-- Users will be able to search for specific restaurants by name.
-- Restaurant owners will be able to add their restaurants and display food menu.
-
-#### Component Hierarchy Diagram
-
-![image](Pictures/Door_Drop_CHD.png)
-
----
+Tetris is a tile-matching puzzle game. The goal is to drop blocks, called tetrominos, down into a playing board to make horizontal lines. There are seven different types of tetrominos. Levels have a set number of lines to clear. When the goal number of lines are clearned the player moves to the next level. As levels go up, the tetrominos fall faster.
 
 ### **_Technologies_**
 
