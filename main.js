@@ -56,8 +56,6 @@ function addEventListener() {
 
       let p = moves[event.key](board.piece)
 
-      // if (board.valid(p)) {
-      //   board.piece.move(p)
       if (event.key === KEY.SPACE) {
         //hard drop
         while (board.valid(p)) {
@@ -71,8 +69,6 @@ function addEventListener() {
           account.score += POINTS.SOFT_DROP
         }
       }
-      // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-      // board.piece.draw()
     }
   })
 }
@@ -91,14 +87,7 @@ function play() {
   if (requestId) {
     cancelAnimationFrame(requestId)
   }
-
   animate()
-  // board.reset()
-  // console.table(board.grid)
-  // let piece = new Piece(ctx)
-  // piece.draw()
-
-  // board.piece = piece
 }
 
 function animate(now = 0) {

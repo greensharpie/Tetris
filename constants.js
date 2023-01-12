@@ -65,7 +65,7 @@ const KEY = {
   DOWN: 'ArrowDown',
   P: 'p'
 }
-// Object.freeze(KEY)
+Object.freeze(KEY)
 
 const POINTS = {
   SINGLE: 100,
