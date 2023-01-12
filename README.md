@@ -8,7 +8,7 @@ Tetris replica project
 
 #### [LinkedIn](https://www.linkedin.com/in/kevinjblanco/) | [GitHub](https://github.com/greensharpie)
 
-### [GitHub - Backend](https://github.com/greensharpie/Door_Drop_Backend) | [Trello Board](https://trello.com/b/xrNp2Go1/door-drop#) | [Heroku App](TBD)
+### [Heroku App](TBD)
 
 ---
 
@@ -32,13 +32,9 @@ Tetris is a tile-matching puzzle game. The goal is to drop blocks, called tetrom
 >
 > ![image](Pictures/LandingPage.png)
 
-> #### **Restaurant Page**
+> #### **Active Game Page**
 >
-> ![image](Pictures/RestPage.png)
-
-> #### **Restaurant Item Page**
->
-> ![image](Pictures/ItemPage.png)
+> ![image](Pictures/ActiveGame.png)
 
 ####
 
