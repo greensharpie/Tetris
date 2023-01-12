@@ -46,19 +46,19 @@ function initNext() {
 
 function addEventListener() {
   document.addEventListener('keydown', (event) => {
-    if (event.keyCode === KEY.P) {
+    if (event.key === KEY.P) {
       pause()
     }
-    if (event.keyCode === KEY.ESC) {
+    if (event.key === KEY.ESC) {
       gameOver()
-    } else if (moves[event.keyCode]) {
+    } else if (moves[event.key]) {
       event.preventDefault()
 
-      let p = moves[event.keyCode](board.piece)
+      let p = moves[event.key](board.piece)
 
       // if (board.valid(p)) {
       //   board.piece.move(p)
-      if (event.keyCode === KEY.SPACE) {
+      if (event.key === KEY.SPACE) {
         //hard drop
         while (board.valid(p)) {
           account.score += POINTS.HARD_DROP
@@ -67,7 +67,7 @@ function addEventListener() {
         }
       } else if (board.valid(p)) {
         board.piece.move(p)
-        if (event.keyCode === KEY.DOWN) {
+        if (event.key === KEY.DOWN) {
           account.score += POINTS.SOFT_DROP
         }
       }
@@ -121,7 +121,7 @@ function gameOver() {
   ctx.fillRect(1, 3, 8, 1.2)
   ctx.font = '1px Arial'
   ctx.fillStyle = 'red'
-  ctx.fillText('Game Over', 1.8, 4)
+  ctx.fillText('GAME OVER', 1.8, 4)
 }
 
 function pause() {
@@ -134,6 +134,6 @@ function pause() {
   ctx.fillStyle = 'black'
   ctx.fillRect(1, 3, 8, 1.2)
   ctx.font = '1px Arial'
-  ctx.fillStyle = 'red'
-  ctx.fillText('Pause', 1.8, 4)
+  ctx.fillStyle = 'yellow'
+  ctx.fillText('PAUSED', 3, 4)
 }

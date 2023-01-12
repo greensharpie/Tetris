@@ -57,15 +57,15 @@ const SHAPES = [
 Object.freeze(SHAPES)
 
 const KEY = {
-  ESC: 27,
-  SPACE: 32,
-  LEFT: 37,
-  UP: 38,
-  RIGHT: 39,
-  DOWN: 40,
-  P: 80
+  ESC: 'Escape',
+  SPACE: ' ',
+  LEFT: 'ArrowLeft',
+  UP: 'ArrowUp',
+  RIGHT: 'ArrowRight',
+  DOWN: 'ArrowDown',
+  P: 'p'
 }
-Object.freeze(KEY)
+// Object.freeze(KEY)
 
 const POINTS = {
   SINGLE: 100,
